@@ -1,17 +1,27 @@
+syntax: glob
+
 *.class
+build/
+out/
+lib/
+.settings/
+.cache
+.metadata/
+.idea/
+.idea/*
+.gradle/
+.history
+target
+lib_managed
+project/boot
+project/target
+*.iml
 *.log
-
-# sbt specific
-.cache/
-.history/
-.lib/
-dist/*
-target/
-lib_managed/
-src_managed/
-project/boot/
-project/plugins/project/
-
-# Scala-IDE specific
-.scala_dependencies
-.worksheet
+*.bak
+.classpath
+.project
+*.orig
+.worksheet/
+*.sc
+.externalToolBuilders/
+.DS_Store
