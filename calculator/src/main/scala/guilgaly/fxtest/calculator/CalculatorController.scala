@@ -1,5 +1,7 @@
 package guilgaly.fxtest.calculator
 
+import Operator._
+
 import org.log4s._
 
 import javafx.scene.control.{Button => JfxButton}

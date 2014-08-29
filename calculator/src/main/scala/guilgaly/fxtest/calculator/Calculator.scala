@@ -1,5 +1,8 @@
 package guilgaly.fxtest.calculator
 
+import CalculatorStatus._
+import Operator._
+
 import org.log4s._
 
 import scalafx.beans.property.{ReadOnlyStringProperty, ReadOnlyStringWrapper}
@@ -172,7 +175,7 @@ class Calculator {
   }
 
   // debug
-  private def debug:Unit = {
+  private def debug: Unit = {
     logger.debug(
       s"""|
           |###############

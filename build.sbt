@@ -1,3 +1,9 @@
+import com.typesafe.sbt.SbtNativePackager._
+
+import NativePackagerKeys._
+
+
+
 name := "scalafx-trials"
 
 def scalafxProject(name: String): Project = (
@@ -43,3 +49,5 @@ val calculator = (
 )
 
 net.virtualvoid.sbt.graph.Plugin.graphSettings // for dependency-tree, etc.
+
+packageArchetype.java_application // for packaging
