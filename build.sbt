@@ -2,28 +2,26 @@ import com.typesafe.sbt.SbtNativePackager._
 
 import NativePackagerKeys._
 
-
-
 name := "scalafx-trials"
 
 def scalafxProject(name: String): Project = (
   Project(name, file(name))
   settings (
     organization := "guilgaly",
-    scalaVersion := "2.11.2",
+    scalaVersion := "2.11.1",
     libraryDependencies ++= Seq(
       // ScalaFX
       "org.scalafx" %% "scalafx" % "8.0.5-R5",
       "org.scalafx" %% "scalafxml-core" % "0.2.1-SNAPSHOT",
       "org.scalafx" %% "scalafxml-subcut" % "0.2.1-SNAPSHOT",
       // IO
-      // "com.github.scala-incubator.io" %% "scala-io-core" % "0.4.3",
-      // "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.3",
+      "com.github.scala-incubator.io" %% "scala-io-core" % "0.4.3",
+      "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.3",
       // DI/IoC
       "com.escalatesoft.subcut" %% "subcut" % "2.1",
       // Database
-      // "com.typesafe.slick" %% "slick" % "2.1.0",
-      // "com.h2database" % "h2" % "1.4.181",
+      "com.typesafe.slick" %% "slick" % "2.1.0",
+      "com.h2database" % "h2" % "1.4.181",
       // Logs
       "org.log4s" %% "log4s" % "1.0.3",
       "org.slf4j" % "slf4j-simple" % "1.7.7",
@@ -51,6 +49,13 @@ val calculator = (
 val exempleCli = (
   Project("exemple-cli", file("exemple-cli"))
   settings (
+    version := "0.0.1-SNAPSHOT"
+  )
+)
+
+val mp3Player = (
+  scalafxProject("mp3-player")
+  settings(
     version := "0.0.1-SNAPSHOT"
   )
 )
