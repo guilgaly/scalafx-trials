@@ -10,6 +10,8 @@ def scalafxProject(name: String): Project = (
     organization := "guilgaly",
     scalaVersion := "2.11.1",
     libraryDependencies ++= Seq(
+      // JavaFX
+      "org.controlsfx" % "controlsfx" % "8.0.6_20",
       // ScalaFX
       "org.scalafx" %% "scalafx" % "8.0.5-R5",
       "org.scalafx" %% "scalafxml-core" % "0.2.1-SNAPSHOT",
@@ -59,3 +61,10 @@ val mp3Player = (
     version := "0.0.1-SNAPSHOT"
   )
 )
+
+val mp3PlayerTwo = (
+  scalafxProject("mp3-player-two")
+    settings(
+    version := "0.0.1-SNAPSHOT"
+    )
+  )

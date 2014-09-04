@@ -60,8 +60,6 @@ object Mp3PlayerApp extends JFXApp {
   // dragged over surface to load media
   initFileDragNDrop()
 
-
-
   /**
    * A simple rectangular area as the surface of the app.
    * @return Node a Rectangle node.
@@ -207,6 +205,7 @@ object Mp3PlayerApp extends JFXApp {
         }
       }
     )
+
     slider.translateX = 10
     slider.translateY <== scene.height.subtract(50)
 
