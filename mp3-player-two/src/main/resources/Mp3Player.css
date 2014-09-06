@@ -1,0 +1,3 @@
+.button, .slider {
+    -fx-focus-traversable: false;
+}
