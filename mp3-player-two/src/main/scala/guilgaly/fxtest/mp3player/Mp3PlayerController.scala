@@ -1,5 +1,6 @@
 package guilgaly.fxtest.mp3player
 
+import customscalafx.scene.control.YieldingSlider
 import org.log4s._
 
 import javafx.scene.media.MediaPlayer.Status
@@ -13,7 +14,6 @@ import scalafx.event.ActionEvent
 import scalafx.scene.control.TableColumn.CellDataFeatures
 
 import scalafx.scene.control._
-import scalafx.scene.control.custom.YieldingSlider
 import scalafx.scene.input.{TransferMode, DragEvent, MouseEvent}
 import scalafx.scene.media.{Media, MediaPlayer}
 import scalafx.stage.FileChooser
@@ -32,7 +32,9 @@ class Mp3PlayerController(
     private val mp3Player: Mp3Player) {
   private[this] val logger = getLogger
 
-  logger.debug(seekSlider.toString())
+  if (seekSlider == null) {
+    sys.error("seekSlider is null - probably because the scalafxml version used doesn't include patch for customscalafx/customjavafx classes.")
+  }
 
   // Config
 

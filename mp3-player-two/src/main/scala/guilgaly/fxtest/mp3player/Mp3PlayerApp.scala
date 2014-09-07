@@ -16,7 +16,7 @@ object Mp3PlayerApp extends JFXApp{
 
   stage = new JFXApp.PrimaryStage {
     title = "MP3 Player"
-    scene = new Scene(FXMLView(getClass.getResource("/Mp3Player.fxml"), new SubCutDependencyResolver))
+    scene = new Scene(FXMLView.apply(getClass.getResource("/Mp3Player.fxml"), new SubCutDependencyResolver))
     minWidth = 400
     minHeight = 200
   }

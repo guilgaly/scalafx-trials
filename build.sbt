@@ -1,3 +1,5 @@
+import sbt.Keys._
+
 name := "scalafx-trials"
 
 def scalafxProject(name: String): Project = (
@@ -6,27 +8,14 @@ def scalafxProject(name: String): Project = (
     organization := "guilgaly",
     scalaVersion := "2.11.1",
     libraryDependencies ++= Seq(
-      // JavaFX
-      "org.controlsfx" % "controlsfx" % "8.0.6_20",
       // ScalaFX
       "org.scalafx" %% "scalafx" % "8.0.5-R5",
-      "org.scalafx" %% "scalafxml-core" % "0.2.1-SNAPSHOT",
-      "org.scalafx" %% "scalafxml-subcut" % "0.2.1-SNAPSHOT",
-      // IO
-      "com.github.scala-incubator.io" %% "scala-io-core" % "0.4.3",
-      "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.3",
-      // DI/IoC
-      "com.escalatesoft.subcut" %% "subcut" % "2.1",
-      // Database
-      "com.typesafe.slick" %% "slick" % "2.1.0",
-      "com.h2database" % "h2" % "1.4.181",
       // Logs
       "org.log4s" %% "log4s" % "1.0.3",
       "org.slf4j" % "slf4j-simple" % "1.7.7",
       // Tests
-      "org.scalatest" %% "scalatest" % "2.2.1" % "test",
-      // Compiler plugins
-      compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)),
+      "org.scalatest" %% "scalatest" % "2.2.1" % "test"
+    ),
       // compilerPlugin("com.escalatesoft.subcut" %% "subcut" % "2.1")),
     resolvers += Opts.resolver.sonatypeSnapshots,
     // Set the prompt (for this build) to include the project id.
@@ -40,7 +29,15 @@ def scalafxProject(name: String): Project = (
 val calculator = (
   scalafxProject("calculator")
   settings (
-    version := "0.0.1-SNAPSHOT"
+    version := "0.0.1-SNAPSHOT",
+    libraryDependencies ++= Seq(
+    "org.scalafx" %% "scalafxml-core" % "0.2.1-SNAPSHOT",
+    "org.scalafx" %% "scalafxml-subcut" % "0.2.1-SNAPSHOT",
+    // DI/IoC
+    "com.escalatesoft.subcut" %% "subcut" % "2.1",
+    // Compiler plugins
+    compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
+    )
   )
 )
 
@@ -68,7 +65,15 @@ val customControls = (
 val mp3PlayerTwo = (
   scalafxProject("mp3-player-two")
   settings (
-    version := "0.0.1-SNAPSHOT"
+    version := "0.0.1-SNAPSHOT",
+    libraryDependencies ++= Seq(
+      "org.scalafx" %% "scalafxml-core" % "0.2.1-SNAPSHOT",
+      "org.scalafx" %% "scalafxml-subcut" % "0.2.1-SNAPSHOT",
+      // DI/IoC
+      "com.escalatesoft.subcut" %% "subcut" % "2.1",
+      // Compiler plugins
+      compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
+    )
   )
   dependsOn customControls
 )

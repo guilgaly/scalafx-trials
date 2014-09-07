@@ -1,4 +1,4 @@
-package javafx.scene.control.custom;
+package customjavafx.scene.control;
 
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
