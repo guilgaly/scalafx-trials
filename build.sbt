@@ -58,9 +58,17 @@ val mp3Player = (
   )
 )
 
+val customControls = (
+  scalafxProject("custom-controls")
+  settings (
+    version := "0.0.1-SNAPSHOT"
+  )
+)
+
 val mp3PlayerTwo = (
   scalafxProject("mp3-player-two")
   settings (
     version := "0.0.1-SNAPSHOT"
   )
+  dependsOn customControls
 )
