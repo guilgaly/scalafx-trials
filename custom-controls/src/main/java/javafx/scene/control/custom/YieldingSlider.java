@@ -1,21 +1,12 @@
 package javafx.scene.control.custom;
 
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
-
-import java.io.IOException;
 
 public class YieldingSlider extends Slider {
 
     public YieldingSlider() {
-        addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(final MouseEvent event) {
-                lastTimeMousePressed = System.currentTimeMillis();
-            }
-        });
+        addEventFilter(MouseEvent.MOUSE_PRESSED, event -> lastTimeMousePressed = System.currentTimeMillis());
     }
 
     public YieldingSlider(final double min, final double max, final double value) {
