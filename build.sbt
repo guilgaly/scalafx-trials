@@ -1,7 +1,3 @@
-import com.typesafe.sbt.SbtNativePackager._
-
-import NativePackagerKeys._
-
 name := "scalafx-trials"
 
 def scalafxProject(name: String): Project = (
@@ -64,7 +60,7 @@ val mp3Player = (
 
 val mp3PlayerTwo = (
   scalafxProject("mp3-player-two")
-    settings(
+  settings (
     version := "0.0.1-SNAPSHOT"
-    )
   )
+)

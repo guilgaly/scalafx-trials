@@ -6,6 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
+<?import javafx.scene.control.custom.YieldingSlider?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guilgaly.fxtest.mp3player.Mp3PlayerController">
 	<stylesheets>
@@ -83,11 +84,11 @@
                   <Insets right="5.0" />
                </padding></Label>
             <Label text="+" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <Slider id="seekSlider" fx:id="seekSlider" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <YieldingSlider id="seekSlider" fx:id="seekSlider" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
-            </Slider>
+            </YieldingSlider>
             <Button id="closeButton" mnemonicParsing="false" onAction="#onClose" prefWidth="60.0" text="Stop" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />

@@ -13,6 +13,7 @@ import scalafx.event.ActionEvent
 import scalafx.scene.control.TableColumn.CellDataFeatures
 
 import scalafx.scene.control._
+import scalafx.scene.control.custom.YieldingSlider
 import scalafx.scene.input.{TransferMode, DragEvent, MouseEvent}
 import scalafx.scene.media.{Media, MediaPlayer}
 import scalafx.stage.FileChooser
@@ -25,22 +26,24 @@ class Mp3PlayerController(
     private val menuBar: MenuBar,
     private val metadataTable: TableView[(String, AnyRef)],
     private val startStopButton: Button,
-    private val seekSlider: Slider,
+    private val seekSlider: YieldingSlider,
     private val timeDisplay: Label,
     private val volumeSlider: Slider,
     private val mp3Player: Mp3Player) {
   private[this] val logger = getLogger
 
+  logger.debug(seekSlider.toString())
+
   // Config
 
   menuBar.useSystemMenuBar = true
 
-  seekSlider.addEventFilter[javafx.scene.input.MouseEvent](MouseEvent.MousePressed, (event: MouseEvent) => { lastTimeMousePressed = System.currentTimeMillis() })
-  private var lastTimeMousePressed = 0l
-  /**
-   * @return true, if user was pressed mouse button within last `t` ms
-   */
-  def mouseWasPressedWithinLast(t: Long): Boolean = (System.currentTimeMillis() - lastTimeMousePressed) <= t
+//  seekSlider.addEventFilter[javafx.scene.input.MouseEvent](MouseEvent.MousePressed, (event: MouseEvent) => { lastTimeMousePressed = System.currentTimeMillis() })
+//  private var lastTimeMousePressed = 0l
+//  /**
+//   * @return true, if user was pressed mouse button within last `t` ms
+//   */
+//  def mouseWasPressedWithinLast(t: Long): Boolean = (System.currentTimeMillis() - lastTimeMousePressed) <= t
 
   private val keyCol = new TableColumn[(String, AnyRef), String]("Metadata")
   keyCol.cellValueFactory = (p: CellDataFeatures[(String, AnyRef), String]) => new StringProperty(p.value._1)
@@ -114,7 +117,7 @@ class Mp3PlayerController(
         timeDisplay.text = format(newTime)
       }}
       seekSlider.value.onChange { (_, _, _) => {
-        if (seekSlider.isValueChanging || mouseWasPressedWithinLast(100l)) {
+        if (seekSlider.isValueChanging || seekSlider.mouseWasPressedWithinLast(100l)) {
           mp3Player.seek(Duration(seekSlider.getValue * 1000))
         }
       }}

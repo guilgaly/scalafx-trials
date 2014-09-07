@@ -17,3 +17,5 @@ JFX.description := "Plays audio files"
 JFX.copyright := "Guillaume Galy 2014"
 
 JFX.license := "MIT"
+
+JFX.verbose := true
