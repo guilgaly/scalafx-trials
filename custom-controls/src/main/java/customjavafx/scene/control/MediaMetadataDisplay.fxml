@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
-<GridPane hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customjavafx.scene.control.MediaMetadataDisplayController">
-  <columnConstraints>
-    <ColumnConstraints fillWidth="false" hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
-    <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" />
-  </columnConstraints>
-  <rowConstraints>
-      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <ImageView id="coverView" fx:id="coverView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowSpan="7" />
-      <Label id="trackName" fx:id="trackName" maxWidth="1.7976931348623157E308" text="trackName" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label id="artist" fx:id="artist" maxWidth="1.7976931348623157E308" text="artist" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label id="album" fx:id="album" maxWidth="1.7976931348623157E308" text="album" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Label id="genre" fx:id="genre" maxWidth="1.7976931348623157E308" text="genre" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <Label id="trackNumber" fx:id="trackNumber" maxWidth="1.7976931348623157E308" text="trackNumber" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-   </children>
-</GridPane>
+<fx:root type="javafx.scene.layout.GridPane" id="MediaMetadataDisplay" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0"
+         prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<columnConstraints>
+		<ColumnConstraints fillWidth="false" hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0"/>
+		<ColumnConstraints halignment="LEFT" hgrow="ALWAYS"/>
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES"/>
+		<RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES"/>
+		<RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES"/>
+		<RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES"/>
+		<RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES"/>
+		<RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES"/>
+		<RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES"/>
+	</rowConstraints>
+	<children>
+		<ImageView id="coverView" fx:id="coverView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowSpan="7"/>
+		<Label id="trackName" fx:id="trackName" maxWidth="1.7976931348623157E308" text="trackName" GridPane.columnIndex="1" GridPane.rowIndex="1">
+			<font>
+				<Font name="System Bold" size="16.0"/>
+			</font>
+		</Label>
+		<Label id="artist" fx:id="artist" maxWidth="1.7976931348623157E308" text="artist" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+		<Label id="album" fx:id="album" maxWidth="1.7976931348623157E308" text="album" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+		<Label id="genre" fx:id="genre" maxWidth="1.7976931348623157E308" text="genre" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+		<Label id="trackNumber" fx:id="trackNumber" maxWidth="1.7976931348623157E308" text="trackNumber" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+	</children>
+</fx:root>

@@ -1,6 +1,6 @@
 package guilgaly.fxtest.mp3player
 
-import customscalafx.scene.control.YieldingSlider
+import customscalafx.scene.control.{MediaMetadataDisplay, YieldingSlider}
 import org.log4s._
 
 import javafx.scene.{media => jfxm}
@@ -41,6 +41,7 @@ import scalafxml.core.macros.sfxml
 class Mp3PlayerController(
     private val mainScene: Pane,
     private val menuBar: MenuBar,
+    private val metadata: MediaMetadataDisplay,
     private val metadataTable: TableView[(String, AnyRef)],
     private val startStopButton: Button,
     private val seekSlider: YieldingSlider,
@@ -147,7 +148,7 @@ class Mp3PlayerController(
   // Volume
   volumeSlider.value <==> mp3Player.volume
 
-  // Display correct metadtat and time for current audio file
+  // Display correct metadata and time for current audio file
   mp3Player.media.onChange { (_, _, newVal) =>
     if (newVal != null) {
       seekSlider.max = newVal.duration.value.toSeconds
@@ -163,8 +164,10 @@ class Mp3PlayerController(
       }}
       // There is no guarantee that metadta are already loaded: we display what we have but udpate if they change.
       metadataTable.items = ObservableBuffer(newVal.metadata.toList)
+      metadata.media = newVal
       newVal.metadata.onChange { (newMap, _) => {
         metadataTable.items = ObservableBuffer(newMap.toList)
+        metadata.media = newVal
       }}
     } else {
       seekSlider.value = 0

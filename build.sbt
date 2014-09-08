@@ -4,7 +4,7 @@ name := "scalafx-trials"
 
 def scalafxProject(name: String): Project = (
   Project(name, file(name))
-  settings (
+  settings(
     organization := "guilgaly",
     scalaVersion := "2.11.2",
     libraryDependencies ++= Seq(
@@ -26,24 +26,30 @@ def scalafxProject(name: String): Project = (
   )
 )
 
-val calculator = (
-  scalafxProject("calculator")
-  settings (
-    version := "0.0.1-SNAPSHOT",
+def scalafxmlProject(name: String): Project = (
+  scalafxProject(name)
+  settings(
     libraryDependencies ++= Seq(
-    "org.scalafx" %% "scalafxml-core" % "0.2.1-SNAPSHOT",
-    "org.scalafx" %% "scalafxml-subcut" % "0.2.1-SNAPSHOT",
-    // DI/IoC
-    "com.escalatesoft.subcut" %% "subcut" % "2.1",
-    // Compiler plugins
-    compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
+      "org.scalafx" %% "scalafxml-core" % "0.2.1-SNAPSHOT",
+      "org.scalafx" %% "scalafxml-subcut" % "0.2.1-SNAPSHOT",
+      // DI/IoC
+      "com.escalatesoft.subcut" %% "subcut" % "2.1",
+      // Compiler plugins
+      compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
     )
+  )
+)
+
+val calculator = (
+  scalafxmlProject("calculator")
+  settings(
+    version := "0.0.1-SNAPSHOT"
   )
 )
 
 val exempleCli = (
   Project("exemple-cli", file("exemple-cli"))
-  settings (
+  settings(
     version := "0.0.1-SNAPSHOT"
   )
 )
@@ -63,17 +69,9 @@ val customControls = (
 )
 
 val mp3PlayerTwo = (
-  scalafxProject("mp3-player-two")
+  scalafxmlProject("mp3-player-two")
   settings (
-    version := "0.0.1-SNAPSHOT",
-    libraryDependencies ++= Seq(
-      "org.scalafx" %% "scalafxml-core" % "0.2.1-SNAPSHOT",
-      "org.scalafx" %% "scalafxml-subcut" % "0.2.1-SNAPSHOT",
-      // DI/IoC
-      "com.escalatesoft.subcut" %% "subcut" % "2.1",
-      // Compiler plugins
-      compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
-    )
+    version := "0.0.1-SNAPSHOT"
   )
   dependsOn customControls
 )
