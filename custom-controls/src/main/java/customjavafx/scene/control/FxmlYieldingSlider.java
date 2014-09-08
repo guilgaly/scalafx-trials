@@ -6,6 +6,10 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
+/**
+ * Same as the {@link customjavafx.scene.control.YieldingSlider}, but using FXML and a separate controller class. Not needed for this simple example,
+ * but usefull for more complex ones. Based on the UnlockCustom sample in the Scene Builder 2.0 Samples.
+ */
 public class FxmlYieldingSlider extends Slider {
 
     public FxmlYieldingSlider() {
@@ -45,6 +49,10 @@ public class FxmlYieldingSlider extends Slider {
     private final FxmlYieldingSliderController controller;
     private long lastTimeMousePressed = 0;
 
+    /**
+     * @param t milliseconds
+     * @return true if mouse was pressed less than t milliseconds ago.
+     */
     public boolean mouseWasPressedWithinLast(final long t) {
         return (System.currentTimeMillis() - lastTimeMousePressed) <= t;
     }

@@ -58,6 +58,7 @@ class Mp3Player {
 
   /**
    * Start playing the current audio file. Does nothing if already playing or if there is no current media file.
+   * @see [[javafx.scene.media.MediaPlayer#play]]
    */
   def play(): Unit = {
     logger.debug("play")
@@ -66,6 +67,7 @@ class Mp3Player {
 
   /**
    * Pauses playing the current audio file. Does nothing if already paused or if there is no current media file.
+   * @see [[javafx.scene.media.MediaPlayer#pause]]
    */
   def pause(): Unit = {
     logger.debug("pause")
@@ -73,13 +75,18 @@ class Mp3Player {
   }
 
   /**
-   *
+   * Stops playing (resets back to beginning).
+   * @see [[javafx.scene.media.MediaPlayer#stop]]
    */
   def stop(): Unit = {
     logger.debug("stop")
     mediaPlayer.foreach(_.stop())
   }
 
+  /**
+   * Seeks to new position.
+   * @see [[javafx.scene.media.MediaPlayer#seek]]
+   */
   def seek(seekTime: Duration): Unit = {
     logger.debug("seek: " + seekTime.toMillis + " ms")
     mediaPlayer.foreach(_.seek(seekTime))

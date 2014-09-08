@@ -3,6 +3,9 @@ package customjavafx.scene.control;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * A {@link javafx.scene.control.Slider} which also allows to know if the mouse was pressed recently.
+ */
 public class YieldingSlider extends Slider {
 
     public YieldingSlider() {
@@ -18,6 +21,10 @@ public class YieldingSlider extends Slider {
 
     private long lastTimeMousePressed = 0;
 
+    /**
+     * @param t milliseconds
+     * @return true if mouse was pressed less than t milliseconds ago.
+     */
     public boolean mouseWasPressedWithinLast(final long t) {
         return (System.currentTimeMillis() - lastTimeMousePressed) <= t;
     }

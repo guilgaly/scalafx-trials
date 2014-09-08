@@ -8,11 +8,13 @@ import scalafx.scene.Scene
 import scalafxml.core.FXMLView
 import scalafxml.subcut.SubCutDependencyResolver
 
-object Mp3PlayerApp extends JFXApp{
-  private val logger = getLogger
-  implicit val bindingModule = new Mp3PlayerConfiguration
+/**
+ * Main object for launching the MP3 Player application.
+ */
+object Mp3PlayerApp extends JFXApp {
 
-  val mp3Player = bindingModule.inject[Mp3Player](None)
+  /** Subcut configuration. */
+  implicit val bindingModule = new Mp3PlayerConfiguration
 
   stage = new JFXApp.PrimaryStage {
     title = "MP3 Player"

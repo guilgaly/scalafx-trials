@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import customjavafx.scene.control.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import java.net.URL?>
 <?import customjavafx.scene.control.YieldingSlider?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guilgaly.fxtest.mp3player.Mp3PlayerController">
+<BorderPane id="mainScene" fx:id="mainScene" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guilgaly.fxtest.mp3player.Mp3PlayerController">
 	<stylesheets>
 		<URL value="@Mp3Player.css" />
 	</stylesheets>
@@ -18,7 +18,6 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#onOpen" text="Open" />
-                  <MenuItem mnemonicParsing="false" onAction="#onClose" text="Close" />
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#onQuit" text="Quit" />
             </items>
@@ -89,7 +88,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </YieldingSlider>
-            <Button id="closeButton" mnemonicParsing="false" onAction="#onClose" prefWidth="60.0" text="Stop" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button id="stopButton" mnemonicParsing="false" onAction="#onStop" prefWidth="60.0" text="Stop" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
