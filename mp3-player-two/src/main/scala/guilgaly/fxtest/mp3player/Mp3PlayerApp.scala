@@ -1,7 +1,5 @@
 package guilgaly.fxtest.mp3player
 
-import org.log4s._
-
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.scene.Scene

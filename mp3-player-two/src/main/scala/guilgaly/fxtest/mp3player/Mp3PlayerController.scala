@@ -3,7 +3,10 @@ package guilgaly.fxtest.mp3player
 import customscalafx.scene.control.YieldingSlider
 import org.log4s._
 
-import javafx.scene.media.MediaPlayer.Status
+import javafx.scene.{media => jfxm}
+import javafx.scene.{control => jfxc}
+import javafx.scene.{image => jfxi}
+import javafx.beans.{property => jfxp}
 
 import scala.util.control.NonFatal
 import scalafx.Includes._
@@ -14,9 +17,9 @@ import scalafx.event.ActionEvent
 import scalafx.scene.control.TableColumn.CellDataFeatures
 
 import scalafx.scene.control._
-import scalafx.scene.input.{TransferMode, DragEvent, MouseEvent}
+import scalafx.scene.image.ImageView
+import scalafx.scene.input.{TransferMode, DragEvent}
 import scalafx.scene.layout.Pane
-import scalafx.scene.media.{Media, MediaPlayer}
 import scalafx.stage.FileChooser
 import scalafx.stage.FileChooser.ExtensionFilter
 import scalafx.util.Duration
@@ -56,8 +59,32 @@ class Mp3PlayerController(
 
   private val keyCol = new TableColumn[(String, AnyRef), String]("Metadata")
   keyCol.cellValueFactory = (p: CellDataFeatures[(String, AnyRef), String]) => new StringProperty(p.value._1)
-  private val valCol = new TableColumn[(String, AnyRef), String]("Value")
-  valCol.cellValueFactory = (p: CellDataFeatures[(String, AnyRef), String]) => new StringProperty(p.value._2.toString)
+  private val valCol = new TableColumn[(String, AnyRef), AnyRef]("Value")
+  valCol.cellValueFactory = (p: CellDataFeatures[(String, AnyRef), AnyRef]) => new jfxp.SimpleObjectProperty(p.value._2)
+  valCol.cellFactory = (c: TableColumn[(String, AnyRef), AnyRef]) =>
+    new jfxc.TableCell[(String, AnyRef), AnyRef] {
+      override def updateItem(item: AnyRef, empty: Boolean): Unit = {
+        super.updateItem(item, empty)
+        if (item != null) {
+          item match {
+            case image: jfxi.Image =>
+              setText(null)
+              val imageView = new ImageView(image)
+              imageView.fitWidth = 200
+              imageView.preserveRatio = true
+              setGraphic(imageView)
+            case _ =>
+              setText(item.toString)
+              setGraphic(null)
+          }
+        } else {
+          setText(null)
+          setGraphic(null)
+        }
+      }
+    }
+
+
   metadataTable.columns.clear()
   metadataTable.columns ++= Seq(keyCol, valCol)
 
@@ -108,13 +135,13 @@ class Mp3PlayerController(
   def onQuit(event: ActionEvent): Unit = Platform.exit()
   /** Starts or stops playback. */
   def onStartStop(event: ActionEvent): Unit = {
-    if (mp3Player.status.value == Status.PLAYING) mp3Player.pause()
+    if (mp3Player.status.value == jfxm.MediaPlayer.Status.PLAYING) mp3Player.pause()
     else mp3Player.play()
   }
 
   // Single button used for Start/Pause: update when status changes
   mp3Player.status.onChange { (_, _, newStatus) => {
-    startStopButton.text = if (newStatus == Status.PLAYING) "Pause" else "Play"
+    startStopButton.text = if (newStatus == jfxm.MediaPlayer.Status.PLAYING) "Pause" else "Play"
   }}
 
   // Volume
