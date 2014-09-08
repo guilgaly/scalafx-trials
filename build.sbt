@@ -6,7 +6,7 @@ def scalafxProject(name: String): Project = (
   Project(name, file(name))
   settings (
     organization := "guilgaly",
-    scalaVersion := "2.11.1",
+    scalaVersion := "2.11.2",
     libraryDependencies ++= Seq(
       // ScalaFX
       "org.scalafx" %% "scalafx" % "8.0.5-R5",
