@@ -5,6 +5,7 @@ name := "scalafx-trials"
 def scalafxProject(name: String): Project = (
   Project(name, file(name))
   settings(
+    version := "0.0.1",
     organization := "guilgaly",
     scalaVersion := "2.11.2",
     libraryDependencies ++= Seq(
@@ -40,38 +41,15 @@ def scalafxmlProject(name: String): Project = (
   )
 )
 
-val calculator = (
-  scalafxmlProject("calculator")
-  settings(
-    version := "0.0.1-SNAPSHOT"
-  )
-)
+val calculator = scalafxmlProject("calculator")
 
-val exempleCli = (
-  Project("exemple-cli", file("exemple-cli"))
-  settings(
-    version := "0.0.1-SNAPSHOT"
-  )
-)
+val exempleCli = Project("exemple-cli", file("exemple-cli"))
 
-val mp3Player = (
-  scalafxProject("mp3-player")
-  settings(
-    version := "0.0.1-SNAPSHOT"
-  )
-)
+val mp3Player = scalafxProject("mp3-player")
 
-val customControls = (
-  scalafxProject("custom-controls")
-  settings (
-    version := "0.0.1-SNAPSHOT"
-  )
-)
+val customControls = scalafxProject("custom-controls")
 
 val mp3PlayerTwo = (
   scalafxmlProject("mp3-player-two")
-  settings (
-    version := "0.0.1-SNAPSHOT"
-  )
   dependsOn customControls
 )
