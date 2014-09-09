@@ -1,24 +1,19 @@
 package guilgaly.fxtest.mp3player
 
+import javafx.scene.control.SeparatorMenuItem
+
 import customscalafx.scene.control.{MediaMetadataDisplay, YieldingSlider}
 import org.log4s._
 
 import javafx.scene.{media => jfxm}
-import javafx.scene.{control => jfxc}
-import javafx.scene.{image => jfxi}
-import javafx.beans.{property => jfxp}
 
 import scala.util.control.NonFatal
 import scalafx.Includes._
 import scalafx.application.Platform
-import scalafx.beans.property.StringProperty
-import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
-import scalafx.scene.control.TableColumn.CellDataFeatures
 
 import scalafx.scene.control._
-import scalafx.scene.image.ImageView
-import scalafx.scene.input.{TransferMode, DragEvent}
+import scalafx.scene.input._
 import scalafx.scene.layout.Pane
 import scalafx.stage.FileChooser
 import scalafx.stage.FileChooser.ExtensionFilter
@@ -30,7 +25,7 @@ import scalafxml.core.macros.sfxml
  *
  * @param mainScene The Main scene.
  * @param menuBar The menu bar.
- * @param metadataTable Table for displaying all metadata of currently playing audio file.
+ * @param metadataDisplay Table for displaying all metadata of currently playing audio file.
  * @param startStopButton Buton to start or pause playback.
  * @param seekSlider Progress bar showing where we are in the currently playing audio file; also allows seeking.
  * @param timeDisplay Displays current play time and duration of the audio file.
@@ -41,8 +36,8 @@ import scalafxml.core.macros.sfxml
 class Mp3PlayerController(
     private val mainScene: Pane,
     private val menuBar: MenuBar,
-    private val metadata: MediaMetadataDisplay,
-    private val metadataTable: TableView[(String, AnyRef)],
+    private val fileMenu: Menu,
+    private val metadataDisplay: MediaMetadataDisplay,
     private val startStopButton: Button,
     private val seekSlider: YieldingSlider,
     private val timeDisplay: Label,
@@ -55,42 +50,18 @@ class Mp3PlayerController(
   }
 
   // Config
-
   menuBar.useSystemMenuBar = true
+  if (System.getProperty("os.name") != "Mac OS X") {
+    // On Mac OS X, the application menu already contains a "Quit" item.
+    val sep = new SeparatorMenuItem
+    val quit = new MenuItem("Quit")
+    quit.onAction = (e: ActionEvent) => onQuit(e)
+    quit.accelerator = new KeyCodeCombination(KeyCode.Q, KeyCombination.ShortcutDown)
 
-  private val keyCol = new TableColumn[(String, AnyRef), String]("Metadata")
-  keyCol.cellValueFactory = (p: CellDataFeatures[(String, AnyRef), String]) => new StringProperty(p.value._1)
-  private val valCol = new TableColumn[(String, AnyRef), AnyRef]("Value")
-  valCol.cellValueFactory = (p: CellDataFeatures[(String, AnyRef), AnyRef]) => new jfxp.SimpleObjectProperty(p.value._2)
-  valCol.cellFactory = (c: TableColumn[(String, AnyRef), AnyRef]) =>
-    new jfxc.TableCell[(String, AnyRef), AnyRef] {
-      override def updateItem(item: AnyRef, empty: Boolean): Unit = {
-        super.updateItem(item, empty)
-        if (item != null) {
-          item match {
-            case image: jfxi.Image =>
-              setText(null)
-              val imageView = new ImageView(image)
-              imageView.fitWidth = 200
-              imageView.preserveRatio = true
-              setGraphic(imageView)
-            case _ =>
-              setText(item.toString)
-              setGraphic(null)
-          }
-        } else {
-          setText(null)
-          setGraphic(null)
-        }
-      }
-    }
-
-
-  metadataTable.columns.clear()
-  metadataTable.columns ++= Seq(keyCol, valCol)
+    fileMenu.items ++= Seq(sep, quit)
+  }
 
   // Drag & drop
-
   mainScene.onDragOver = (e: DragEvent) => {
     val db = e.getDragboard
     if (db.hasFiles || db.hasUrl) e.acceptTransferModes(TransferMode.LINK)
@@ -148,7 +119,7 @@ class Mp3PlayerController(
   // Volume
   volumeSlider.value <==> mp3Player.volume
 
-  // Display correct metadata and time for current audio file
+  // Display correct metadataDisplay and time for current audio file
   mp3Player.media.onChange { (_, _, newVal) =>
     if (newVal != null) {
       seekSlider.max = newVal.duration.value.toSeconds
@@ -162,18 +133,13 @@ class Mp3PlayerController(
           mp3Player.seek(Duration(seekSlider.getValue * 1000))
         }
       }}
-      // There is no guarantee that metadta are already loaded: we display what we have but udpate if they change.
-      metadataTable.items = ObservableBuffer(newVal.metadata.toList)
-      metadata.media = newVal
-      newVal.metadata.onChange { (newMap, _) => {
-        metadataTable.items = ObservableBuffer(newMap.toList)
-        metadata.media = newVal
-      }}
+      metadataDisplay.metadata.setValue(newVal.metadata)
+
     } else {
       seekSlider.value = 0
       seekSlider.max = 0
       timeDisplay.text = "00:00"
-      metadataTable.items = ObservableBuffer()
+      metadataDisplay.metadata.setValue(null)
     }
   }
 

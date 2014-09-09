@@ -1,12 +1,10 @@
 package customscalafx.scene.control
 
-import scala.language.implicitConversions
+import javafx.beans.property.MapProperty
 
-import javafx.scene.{media => jfxm}
 import customjavafx.scene.{control => jfxsc}
 
-import scalafx.Includes._
-import scalafx.beans.property.ObjectProperty
+import scala.language.implicitConversions
 import scalafx.scene.layout.GridPane
 
 object MediaMetadataDisplay {
@@ -15,8 +13,6 @@ object MediaMetadataDisplay {
 
 class MediaMetadataDisplay(override val delegate: jfxsc.MediaMetadataDisplay = new jfxsc.MediaMetadataDisplay) extends GridPane {
 
-  def media: ObjectProperty[jfxm.Media] = delegate.mediaProperty
-  def media_=(m: jfxm.Media) = {
-    media() = m
-  }
+  /** The metadata to display. */
+  def metadata: MapProperty[String, AnyRef] = delegate.getMetadata
 }
