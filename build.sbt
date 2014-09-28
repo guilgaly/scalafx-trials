@@ -31,8 +31,8 @@ def scalafxmlProject(name: String): Project = (
   scalafxProject(name)
   settings(
     libraryDependencies ++= Seq(
-      "org.scalafx" %% "scalafxml-core" % "0.2.1-SNAPSHOT",
-      "org.scalafx" %% "scalafxml-subcut" % "0.2.1-SNAPSHOT",
+      "org.scalafx" %% "scalafxml-core" % "0.2.2-SNAPSHOT",
+      "org.scalafx" %% "scalafxml-subcut" % "0.2.2-SNAPSHOT",
       // DI/IoC
       "com.escalatesoft.subcut" %% "subcut" % "2.1",
       // Compiler plugins
